@@ -1,0 +1,21 @@
+you can have two canvas in a form, one for logon and when logon success go another.
+The trigger when-button-pressed of logon button may like this:
+**************************
+DECLARE
+v_exist	VARCHAR2(1)
+BEGIN
+SELECT 'x'
+INTO v_exist
+FROM login_details
+WHERE loginid = :loginid 
+AND Password = :Password;
+
+GO_ITEM('new_block.new_item');
+
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+MESSAGE('loginid or password error');
+clear_form;
+END;
+******************************
+====================================================================
